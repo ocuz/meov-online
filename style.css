@@ -1,0 +1,8 @@
+/* Optional custom styling beyond Tailwind */
+body {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.hidden {
+  display: none;
+}
