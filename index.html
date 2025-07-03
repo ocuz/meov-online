@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Roblox Username Checker</title>
+  <link rel="stylesheet" href="style.css">
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-950 text-white font-mono min-h-screen">
@@ -36,7 +37,7 @@
       <input type="file" id="fileUpload" accept=".txt" class="text-white"/>
     </div>
 
-    <div class="mb-4">
+    <div class="mb-4" id="countWrapper">
       <label class="block text-sm mb-1">How many usernames to check?</label>
       <input type="number" id="countInput" class="w-full p-2 bg-gray-800 border border-gray-700 rounded" value="10"/>
     </div>
@@ -46,87 +47,6 @@
     <div id="results" class="mt-6 space-y-2"></div>
   </div>
 
-  <script>
-    const patternSelect = document.getElementById("patternSelect");
-    const customPatternInput = document.getElementById("customPatternInput");
-    const fileInput = document.getElementById("fileInput");
-    const fileUpload = document.getElementById("fileUpload");
-    const countInput = document.getElementById("countInput");
-    const resultsDiv = document.getElementById("results");
-
-    patternSelect.addEventListener("change", () => {
-      const value = patternSelect.value;
-      customPatternInput.classList.toggle("hidden", value !== "8");
-      fileInput.classList.toggle("hidden", value !== "9");
-      countInput.parentElement.classList.toggle("hidden", value === "9");
-    });
-
-    const randChar = (c) => {
-      if (c === "L") return String.fromCharCode(65 + Math.floor(Math.random() * 26));
-      if (c === "D") return Math.floor(Math.random() * 10);
-      return c;
-    };
-
-    const genFromFormat = (fmt) => [...fmt].map(randChar).join('');
-
-    const patterns = {
-      1: () => `${randChar("L")}_${randChar("L")}${randChar("L")}${randChar("L")}`,
-      2: () => `${randChar("L")}${randChar("L")}_${randChar("L")}${randChar("L")}`,
-      3: () => `${randChar("L")}${randChar("L")}${randChar("L")}_${randChar("L")}`,
-      4: () => `${randChar("L")}_${randChar("L")}${randChar("D")}${randChar("L")}`,
-      5: () => `${randChar("L")}${randChar("L")}_${randChar("D")}${randChar("L")}`,
-      6: () => `${randChar("L")}${randChar("L")}${randChar("D")}_${randChar("L")}`,
-      7: () => `${randChar("L")}${randChar("D")}${randChar("L")}${randChar("D")}${randChar("L")}`
-    };
-
-    const checkUsername = async (username) => {
-      const url = `https://auth.roblox.com/v1/usernames/validate?username=${username}&birthday=2001-09-11`;
-      try {
-        const res = await fetch(url);
-        const data = await res.json();
-        return data.code;
-      } catch (err) {
-        return -1;
-      }
-    };
-
-    document.getElementById("startBtn").addEventListener("click", async () => {
-      resultsDiv.innerHTML = "";
-      const choice = patternSelect.value;
-      const count = parseInt(countInput.value) || 10;
-      let usernames = [];
-
-      if (choice === "9") {
-        const file = fileUpload.files[0];
-        if (!file) return alert("Please upload a file.");
-        const text = await file.text();
-        usernames = text.split(/\r?\n/).filter(Boolean);
-      } else if (choice === "8") {
-        const pattern = document.getElementById("customPattern").value.toUpperCase();
-        usernames = Array.from({ length: count }, () => genFromFormat(pattern));
-      } else if (patterns[choice]) {
-        usernames = Array.from({ length: count }, patterns[choice]);
-      }
-
-      for (const name of usernames) {
-        const code = await checkUsername(name);
-        const span = document.createElement("div");
-        if (code === 0) {
-          span.className = "text-green-400";
-          span.textContent = `[VALID] ${name}`;
-        } else if (code === 1) {
-          span.className = "text-white";
-          span.textContent = `[TAKEN] ${name}`;
-        } else if (code === 2) {
-          span.className = "text-red-500";
-          span.textContent = `[CENSORED] ${name}`;
-        } else {
-          span.className = "text-yellow-400";
-          span.textContent = `[ERROR] ${name}`;
-        }
-        resultsDiv.appendChild(span);
-      }
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
