@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Roblox Username Checker</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-950 text-white font-mono min-h-screen">
@@ -22,7 +22,7 @@
         <option value="5">1X_2X</option>
         <option value="6">1X2_X</option>
         <option value="7">X1X2X</option>
-        <option value="8">Custom (LLDD)</option>
+        <option value="8">Custom (L and D)</option>
         <option value="9">Load from .txt file</option>
       </select>
     </div>
@@ -34,17 +34,31 @@
 
     <div id="fileInput" class="mb-4 hidden">
       <label class="block text-sm mb-1">Upload .txt File:</label>
-      <input type="file" id="fileUpload" accept=".txt" class="text-white"/>
+      <input type="file" id="fileUpload" accept=".txt" class="text-white" />
     </div>
 
     <div class="mb-4" id="countWrapper">
       <label class="block text-sm mb-1">How many usernames to check?</label>
-      <input type="number" id="countInput" class="w-full p-2 bg-gray-800 border border-gray-700 rounded" value="10"/>
+      <input type="number" id="countInput" class="w-full p-2 bg-gray-800 border border-gray-700 rounded" value="10" min="1" />
     </div>
 
-    <button id="startBtn" class="w-full bg-green-500 hover:bg-green-600 text-black font-bold py-2 px-4 rounded">Start Checking</button>
+    <button id="startBtn" class="w-full bg-green-500 hover:bg-green-600 text-black font-bold py-2 px-4 rounded">
+      Start Checking
+    </button>
 
     <div id="results" class="mt-6 space-y-2"></div>
+
+    <div class="mt-6 flex flex-wrap gap-4">
+      <button id="downloadValid" class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded">
+        Download Valid
+      </button>
+      <button id="downloadTaken" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded">
+        Download Taken
+      </button>
+      <button id="downloadCensored" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded">
+        Download Censored
+      </button>
+    </div>
   </div>
 
   <script src="script.js"></script>
