@@ -2,64 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Roblox Username Checker</title>
   <link rel="stylesheet" href="style.css" />
-  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-950 text-white font-mono min-h-screen">
-  <div class="max-w-4xl mx-auto py-10 px-4">
-    <h1 class="text-3xl font-bold text-center mb-6 text-green-400">Roblox Username Checker</h1>
-    <p class="text-center text-sm mb-6">Credits to ocuz (Clemouche)</p>
-
-    <div class="mb-6">
-      <label class="block text-sm font-semibold mb-2">Choose a Pattern:</label>
-      <select id="patternSelect" class="w-full p-2 bg-gray-800 border border-gray-700 rounded">
-        <option value="1">X_XXX</option>
-        <option value="2">XX_XX</option>
-        <option value="3">XXX_X</option>
-        <option value="4">1_X2X</option>
-        <option value="5">1X_2X</option>
-        <option value="6">1X2_X</option>
-        <option value="7">X1X2X</option>
-        <option value="8">Custom (L and D)</option>
-        <option value="9">Load from .txt file</option>
-      </select>
-    </div>
-
-    <div id="customPatternInput" class="mb-4 hidden">
-      <label class="block text-sm mb-1">Enter Custom Pattern (L=Letter, D=Digit):</label>
-      <input type="text" id="customPattern" class="w-full p-2 bg-gray-800 border border-gray-700 rounded" />
-    </div>
-
-    <div id="fileInput" class="mb-4 hidden">
-      <label class="block text-sm mb-1">Upload .txt File:</label>
-      <input type="file" id="fileUpload" accept=".txt" class="text-white" />
-    </div>
-
-    <div class="mb-4" id="countWrapper">
-      <label class="block text-sm mb-1">How many usernames to check?</label>
-      <input type="number" id="countInput" class="w-full p-2 bg-gray-800 border border-gray-700 rounded" value="10" min="1" />
-    </div>
-
-    <button id="startBtn" class="w-full bg-green-500 hover:bg-green-600 text-black font-bold py-2 px-4 rounded">
-      Start Checking
-    </button>
-
-    <div id="results" class="mt-6 space-y-2"></div>
-
-    <div class="mt-6 flex flex-wrap gap-4">
-      <button id="downloadValid" class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded">
-        Download Valid
-      </button>
-      <button id="downloadTaken" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded">
-        Download Taken
-      </button>
-      <button id="downloadCensored" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded">
-        Download Censored
-      </button>
-    </div>
-  </div>
+<body>
+  <h1>Roblox Username Checker</h1>
+  <input type="text" id="usernameInput" placeholder="Enter username" />
+  <button onclick="checkUsername()">Check</button>
+  <p id="result"></p>
 
   <script src="script.js"></script>
 </body>
